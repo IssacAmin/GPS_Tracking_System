@@ -287,7 +287,18 @@ void draw_route(unsigned char *bitmap,DIRECTION direction, uint8_t *lastKnownX, 
 			UpdateBitmap(bitmap, DOWN, lastKnownX, lastKnownY);
 			UpdateBitmap(bitmap, LEFT, lastKnownX, lastKnownY);
 			break;
-		
+		case UP:
+			UpdateBitmap(bitmap, UP, lastKnownX, lastKnownY);
+			break;
+		case DOWN:
+			UpdateBitmap(bitmap, DOWN, lastKnownX, lastKnownY);
+			break;
+		case RIGHT:
+			UpdateBitmap(bitmap, RIGHT, lastKnownX, lastKnownY);
+			break;
+		case LEFT:
+			UpdateBitmap(bitmap, LEFT, lastKnownX, lastKnownY);
+			break;
 		default:
 			break;
 	}
