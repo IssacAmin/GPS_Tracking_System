@@ -36,3 +36,12 @@ void lcd_init(void);
 void Graphic_Init(void);
 void Graphic_Stop(void);
 void DrawBitmap(unsigned char *bitmap);
+void lcd_clear(void);
+void UpdateBitmap(unsigned char *bitmap,DIRECTION direction, uint8_t *lastKnownX, uint8_t *lastKnownY);
+void SendString(int row, int col, unsigned char* string);
+void Bitmap_Init(uint8_t image[],uint8_t logo[]);
+void bitmap_clear(unsigned char *bitmap);
+void draw_route(unsigned char *bitmap,DIRECTION direction, uint8_t *lastKnownX, uint8_t *lastKnownY);
+#endif
+void Graphic_Stop(void);
+void DrawBitmap(unsigned char *bitmap);
