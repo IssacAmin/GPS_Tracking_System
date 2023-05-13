@@ -241,3 +241,97 @@ int main(void){
 		lcd_clear();
 */
 		SendString(0,0,"  Calculating...");
+		while(GPS_manipulated_string(msg, coordinate)==1);
+		displacement = get_distance(coordinate[1], coordinate[0], entered_coordinate[1], entered_coordinate[0]);
+	//start calculations and drawing bitmap
+				if(displacement < 100)
+		{
+			SendString(0,0,"Coordinate too close");
+			return 1;
+		}
+		else
+		{
+			int j = 0;
+			delay_ms(5000);
+		for(j = 0; j < 2;j++)
+		{
+			prev_coordinate[j] = coordinate[j];
+		}
+	//	sprintf(keypadBuffer, "%.2f, %.2f",coordinate[0], coordinate[1]); 
+	//	SendString(1,0, keypadBuffer); 
+		sprintf(keypadBuffer, "%.2f m left",displacement);
+		SendString(2, 0, keypadBuffer);
+		while(1)
+		{
+			SendString(0,0,"recalculating");
+		while(GPS_manipulated_string(msg, coordinate)==1);
+		displacement = get_distance(coordinate[1], coordinate[0], entered_coordinate[1], entered_coordinate[0]);
+		//sprintf(keypadBuffer, "%.2f, %.2f",coordinate[0], coordinate[1]); 
+		//SendString(1,0, keypadBuffer);
+		sprintf(keypadBuffer, "%.2f m left",displacement);
+		SendString(2, 0, keypadBuffer);
+		if(displacement < 1)
+		{
+			RGB_off(RED);
+			RGB_off(BLUE);
+			RGB_on(GREEN);
+			lcd_clear();
+			SendString(0,0,"Destination Reached...");
+			return 0;
+		}
+		else if(displacement < 5)
+		{
+			RGB_off(RED);
+			RGB_off(GREEN);
+			RGB_on(BLUE);
+		}
+		else
+		{
+			RGB_off(GREEN);
+			RGB_off(BLUE);
+			RGB_on(RED);
+		}
+		}
+	//	bearing = getBearing(coordinate[1], coordinate[0], prev_coordinate[1], prev_coordinate[0]);
+/*	while(1)
+	{
+		int j = 0;
+		delay_ms(5000);
+		draw_route(image, UP,&lastKnownX,&lastKnownY);
+		for(j = 0; j < 2;j++)
+		{
+			prev_coordinate[j] = coordinate[j];
+		}		
+		while(GPS_manipulated_string(msg, coordinate)==1);
+		distance = get_distance(coordinate[1], coordinate[0], prev_coordinate[1], prev_coordinate[0]);
+		current_displacement = get_distance(coordinate[1], coordinate[0], entered_coordinate[1], entered_coordinate[0]);
+		total_distance += distance;
+		direction = getDirection(coordinate[1], coordinate[0], prev_coordinate[1], prev_coordinate[0], bearing);
+		draw_route(image, direction,&lastKnownX,&lastKnownY);
+		if(current_displacement < 1)
+		{
+			RGB_off(RED);
+			RGB_off(BLUE);
+			RGB_on(GREEN);
+			lcd_clear();
+			SendString(0,0,"Destination Reached...");
+			return 0;
+		}
+		else if(current_displacement < 5)
+		{
+			RGB_off(RED);
+			RGB_off(GREEN);
+			RGB_on(BLUE);
+		}
+		else
+		{
+			RGB_off(GREEN);
+			RGB_off(BLUE);
+			RGB_on(RED);
+		}
+		
+		
+	}*/
+}
+}
+
